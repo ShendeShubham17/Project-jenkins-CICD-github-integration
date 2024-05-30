@@ -1,0 +1,159 @@
+Waterfall model used in the all industry to help and bult good product or application for user
+
+in waterfall model development happed in step by step
+like
+
+These are the step help to build good infrastructure 
+requirement analysis - analysis team discus the requirement of client regarding the project
+design - design team make plan to how to create project
+development - development team start to write code according the project 
+testing - testing ensure to application is error free and meet used for user
+maintainance - maintanance team help to maintanance the helthy enviroment to run application smoothly.
+
+
+Disadvantage of waterfall model is that if any new changes require in application we need to restart that project.
+restart the project is very expensive and time consuming.
+
+workflow in software development are divided into the 8 steps
+
+code
+build 
+plan
+test
+intergrate
+monitoring
+deploy
+operate 
+
+How to serarch pub and private key
+ssh-keygen and press enter
+serarch folder = cd .ssh
+check list     = ls
+
+
+
+
+Project - Jenkins CI CD with github project using freestyle pipeline project.
+
+1- EC2 instance
+2- git-hub
+3- Jenkins
+4- Docker
+
+Step 1- create EC2 instance
+step 2 - install jenkins in ec2 instancec
+step 3 - using ec2 public and private key we connect jenkins to git hub and jenkins to ec2 .
+step 4 - add git hub repository url in jenkins job
+
+
+Virtual TechBox
+
+Jenkins web hook = webhook means nothing but relation between github and jenkins , when any chanages did by developer in his code and then commited code on git hub 
+                   this changes automatically done in jenkins called as webhook.
+
+*********************************************************************************************************************************************************************
+Live DevOps Project for Resume - Jenkins CICD with GitHub Integration (Notes)
+
+- Create AWS EC2 instance
+ sudo apt update
+ install jenkins in EC2 
+ sudo apt install openjdk-11-jre
+ java -version
+ curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | sudo tee \   /usr/share/keyrings/jenkins-keyring.asc > /dev/null 
+ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \   https://pkg.jenkins.io/debian binary/ | sudo tee \   /etc/apt/sources.list.d/jenkins.list > /dev/null
+ sudo apt-get update 
+ sudo apt-get install jenkins
+ sudo systemctl enable jenkins
+ sudo systemctl start jenkins
+ sudo systemctl status jenkins
+ sudo cat /var/lib/jenkins/secrets/initialAdminPasswords
+
+* using the ssh public key we connect git-hub to our server
+
+   how to generate sshkey
+   command = ssh-keygen
+   |
+   Enter
+   |
+   cd .ssh
+   |
+  found pub and private key
+
+* how to connect github to server
+
+go to git hub account setting
+   |
+ssh and ssg key
+   |
+add key
+   |
+select
+   |
+give authentication token
+
+now connection between jenkins and github
+
+go to the credential setting
+|
+name of relation
+|
+description
+|
+username = server username
+|
+upload privaete key
+|
+connect
+
+* After build we found where our git-hub pckg found
+     /var/lib/jenkins/workplace/
+
+* install application which require for running app
+   node.js
+
+* Install docker in ec2 instance
+
+sudo apt install docker.io
+
+* create docker image 
+
+FROM node:12.2.0-alpine
+WORKDIR app
+COPY . .
+RUN npm install
+EXPOSE 8000
+CMD ["node","app.js"]
+
+
+docker build . -t node-app
+sudo usermod -a -G docker $USER
+docker run -d --name node-todo-app -p 8000:8000 todo-node-app
+
+* Go to jenkins job
+Execute shell 
+docker build . -t node-app-todo
+docker run -d --name node-app-container -p 8000:8000 node-app-todo
+
+* FOR THE automate cicd pipeline 
+  
+github integration plug in downloaded
+|
+go to git hub repository setting
+create webhook and add jenkins link to webhook
+go to jenkins job
+|
+configure
+|
+build trigger
+|
+git hub hook trigger
+
+************************************************************************************************************************************************************************
+
+
+
+
+
+
+
+
